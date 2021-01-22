@@ -17,6 +17,6 @@ public class TipoConta {
     @Column(name = "id_tipo_conta")
     private Integer id;
 
-    @Column(name = "tipo_conta")
+    @Column(name = "tipo_conta",nullable = false, unique = true)
     private String tipoConta;
 }
