@@ -25,5 +25,9 @@ public class TipoContaService {
         return tipoConta.orElseThrow(() -> new ObjectNotFoundException("Tipo de conta não encontrado! Id: "+id_tipo_conta));
     }
 
+    public TipoConta create(TipoConta tipoConta){
+        return tipoContaRepository.save(tipoConta);
+    }
+
 
 }
