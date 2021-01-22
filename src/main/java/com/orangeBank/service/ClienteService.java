@@ -1,5 +1,6 @@
 package com.orangeBank.service;
 
+import com.orangeBank.exception.ObjectNotFoundException;
 import com.orangeBank.model.Cliente;
 import com.orangeBank.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,6 @@ public class ClienteService {
 
     public Cliente findById(Integer id){
         Optional<Cliente> cliente = this.clienteRepository.findById(id);
-        return cliente.orElse(null);
+        return cliente.orElseThrow(() -> new ObjectNotFoundException("Cliente não encontrado! Id: " +id));
     }
 }
