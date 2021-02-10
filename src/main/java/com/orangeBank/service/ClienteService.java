@@ -6,6 +6,7 @@ import com.orangeBank.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,5 +18,8 @@ public class ClienteService {
     public Cliente findById(Integer id){
         Optional<Cliente> cliente = this.clienteRepository.findById(id);
         return cliente.orElseThrow(() -> new ObjectNotFoundException("Cliente não encontrado! Id: " +id));
+    }
+    public List<Cliente> findAll(){
+        return clienteRepository.findAll();
     }
 }

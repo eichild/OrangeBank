@@ -32,4 +32,5 @@ public class Cliente {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate dataDeNascimento;
 
+
 }
