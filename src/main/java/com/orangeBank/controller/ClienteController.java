@@ -22,9 +22,6 @@ public class ClienteController {
     @Autowired
     ClienteService clienteService;
 
-    @Autowired
-    private ModelMapper modelMapper;
-
     @GetMapping(value = "/{id}")
     public ResponseEntity<Cliente> findById(@PathVariable Integer id){
         Cliente cliente = clienteService.findById(id);
@@ -33,16 +30,6 @@ public class ClienteController {
 
     @GetMapping
     public ResponseEntity<List<ClienteDTO>> findAll(){
-        List<Cliente> cliente = clienteService.findAll();
-        List<ClienteDTO> clienteDTO =new ArrayList<>();
-
-        cliente.forEach(
-            cliente1 -> clienteDTO.add(clienteToClienteDTO(cliente1))
-        );
-        return ResponseEntity.ok().body(clienteDTO);
-    }
-
-    private ClienteDTO clienteToClienteDTO(Cliente cliente){
-        return modelMapper.map(cliente, (Type) ClienteDTO.class);
-    }
+    return ResponseEntity.ok(this.clienteService.findAll());
 }
+    }
