@@ -29,7 +29,6 @@ public class ClienteService {
     public List<ClienteDTO> findAll(){
         List<Cliente> cliente = clienteRepository.findAll();
         List<ClienteDTO> clienteDTO =new ArrayList<>();
-
         cliente.forEach(
                 cliente1 -> clienteDTO.add(clienteToClienteDTO(cliente1))
         );
@@ -40,8 +39,18 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
+    public Cliente update(Integer id, ClienteDTO clienteDTO) throws ObjectNotFoundException{
+        Cliente cliente =  this.clienteRepository.findById(id).orElse(null);
+        if (cliente == null) {
+            throw new ObjectNotFoundException("Cliente com ID: " + id + " Não encontrado!");
+        }
+        
+        return clienteRepository.save(cliente);
+
+    }
     private ClienteDTO clienteToClienteDTO(Cliente cliente){
         return modelMapper.map(cliente, (Type) ClienteDTO.class);
     }
 
-    }
+
+}

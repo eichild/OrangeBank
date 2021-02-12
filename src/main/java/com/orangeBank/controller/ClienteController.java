@@ -3,16 +3,13 @@ package com.orangeBank.controller;
 import com.orangeBank.dtos.ClienteDTO;
 import com.orangeBank.model.Cliente;
 import com.orangeBank.service.ClienteService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.Servlet;
-import java.lang.reflect.Type;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -37,5 +34,10 @@ public class ClienteController {
         //Ver lógica do URI
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId()).toUri();
         return ResponseEntity.created(uri).body(cliente);
+    }
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@PathVariable Integer id, @RequestBody ClienteDTO clienteDTO){
+      this.clienteService.update(id, clienteDTO);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     }
