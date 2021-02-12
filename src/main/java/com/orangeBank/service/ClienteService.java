@@ -36,6 +36,10 @@ public class ClienteService {
         return clienteDTO;
     }
 
+    public Cliente create(Cliente cliente){
+        return clienteRepository.save(cliente);
+    }
+
     private ClienteDTO clienteToClienteDTO(Cliente cliente){
         return modelMapper.map(cliente, (Type) ClienteDTO.class);
     }
