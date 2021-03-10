@@ -12,6 +12,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+import static org.springframework.http.ResponseEntity.*;
+
 @RestController
 @RequestMapping(value = "/clientes")
 public class ClienteController {
@@ -22,22 +24,22 @@ public class ClienteController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Cliente> findById(@PathVariable Integer id){
         Cliente cliente = clienteService.findById(id);
-        return ResponseEntity.ok().body(cliente);
+        return ok().body(cliente);
     }
     @GetMapping
     public ResponseEntity<List<ClienteDTO>> findAll(){
-        return ResponseEntity.ok(this.clienteService.findAll());
+        return ok(this.clienteService.findAll());
     }
     @PostMapping
     public ResponseEntity<Cliente> create(@RequestBody Cliente cliente){
         cliente = clienteService.create(cliente);
         //Ver lógica do URI
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId()).toUri();
-        return ResponseEntity.created(uri).body(cliente);
+        return created(uri).body(cliente);
     }
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@PathVariable Integer id, @RequestBody ClienteDTO clienteDTO){
       this.clienteService.update(id, clienteDTO);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return status(HttpStatus.NO_CONTENT).build();
     }
     }
